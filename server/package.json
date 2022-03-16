@@ -1,0 +1,30 @@
+{
+  "name": "yad188g04-meudireito",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lufamelli/YAD188G04-MeuDireito.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lufamelli/YAD188G04-MeuDireito/issues"
+  },
+  "homepage": "https://github.com/lufamelli/YAD188G04-MeuDireito#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.4",
+    "path": "^0.12.7",
+    "yup": "^0.32.11"
+  }
+}
