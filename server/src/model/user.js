@@ -1,16 +1,21 @@
+// edit 1: onde era Schema coloquei Account e onde era user coloquei account
+// edit 2 coloquei dentro do account os _user e o _lawyer e coloquei esses schemas
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const Schema = new mongoose.Schema({
+const Account = new mongoose.Schema({
   firstName: String,
   lastName: String,
   email: String,
-  password: String
+  password: String,
+  oabNumber: String,
+  cpf: String,
+  role: String
 },{
   timestamps: true
 })
 
-Schema.pre('save',function(next) {
+Account.pre('save',function(next) {
   if(!this.isModified("password")){
     return next();
   }
@@ -18,7 +23,7 @@ Schema.pre('save',function(next) {
   next();
 });
 
-Schema.pre('findOneAndUpdate',function(next) {
+Account.pre('findOneAndUpdate',function(next) {
   var password = this.getUpdate().password+'';
   if(!password.length < 55){
     this.getUpdate().password = bcrypt.hashSync(password,10);
@@ -26,7 +31,7 @@ Schema.pre('findOneAndUpdate',function(next) {
   next();
 });
 
-Schema.methods.isCorrectPassword = function (password, callback) {
+Account.methods.isCorrectPassword = function (password, callback) {
   bcrypt.compare(password,this.password,function (err,same){
     if (err) {
       callback(err);
@@ -37,5 +42,21 @@ Schema.methods.isCorrectPassword = function (password, callback) {
   })
 }
 
-const user = mongoose.model('User', Schema)
-module.exports = user;
+Account.methods.isEmailRegistered = async function(email){
+  try {
+    const usedEmail = await this.findOne({email})
+    if(usedEmail) {
+      return false;
+    } 
+    else {
+      return true
+    }  
+  } catch (err) {
+    console.log('Erro na verificação de email', err.message);
+    return false;
+  }
+  
+}
+
+const account = mongoose.model('User', Account)
+module.exports = account;  

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
 
-import {login, setIdUser, setNomeUser} from '../../services/auth'
+/*import {login, setIdUser, setNomeUser} from '../../services/auth'*/
 export default function LoginUser() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -15,9 +15,9 @@ export default function LoginUser() {
       if(res.status===200){
       console.log('entrou no 200')
         if(res.data.status===1){
-          login(res.data.token);
-          setIdUser(res.data._id)
-          setNomeUser(res.data.firstName)
+          // login(res.data.token);
+          //setIdUser(res.data._id)
+          //setNomeUser(res.data.firstName)
           console.log('entrou no status 1')
 
           window.location.href= '/user/show'
@@ -59,7 +59,7 @@ export default function LoginUser() {
             type="password"
             required/>
         </div>  
-        <button className="btn" type="submit">Cadastrar</button>
+        <button className="btn" type="submit">Entrar</button>
       </form>    
     </div>
   );

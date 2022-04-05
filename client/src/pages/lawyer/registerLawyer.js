@@ -1,11 +1,12 @@
 import React,{useState} from 'react';
 import api from '../../services/api'
-
-export default function ResgisterUser() {
+export default function ResgisterLawyer() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [oabNumber, setOabNumber] = useState('')
+  const [cpf, setCpf] = useState('')
 
   async function handleSubmit(event) {
     //conexão React - Node
@@ -14,48 +15,25 @@ export default function ResgisterUser() {
       firstName:firstName, 
       lastName:lastName, 
       email:email, 
-      password:password
+      password:password,
+      oabNumber:oabNumber,
+      cpf:cpf
     }
 
     if(firstName !== '' && lastName !== '' && email !== '' && password!== '') {
       const response = await api.post('/user', data);
 
-
-      console.log('entrou no handleSubmit')
-      //if(response.status === 200) 
-      //{
+      if(response.status === 200) {
       window.location.href = '/user'
       console.log('status 200')
       alert('Usuário criado com sucesso.')
-      console.log('entrou no status 200')
-      //}
-     if(response.status === 403) {
-        console.log('status 403')
-        alert('Email ja cadstrado')
       }
       else {
-        console.log('status = ', response.status)
+      alert("Erro no casdastro de usuario")
+      console.log('status 500')
       }
     }
   }
-
-  async function handleNoSubmit() {
-    const data = {
-      firstName:firstName, 
-      lastName:lastName, 
-      email:email, 
-      password:password
-    }
-
-    if(firstName !== '' && lastName !== '' && email !== '' && password!== '') {
-      const response = await api.post('/user', data);
-
-      if(response.status === 403) {
-        console.log('status 403')
-        alert('Email ja cadstrado')
-        }
-    }
-  }  
   return (
     <div>
       <h1>Cadastrar usuário</h1>
@@ -105,7 +83,19 @@ export default function ResgisterUser() {
             <input className="formField" name="confirmPassword" 
               placeholder="Confirmação de senha" type="password" required/>
           </div>
-          <button className="btn" onClick={handleNoSubmit} type="submit">Cadastrar</button>  
+          <div className="inputField">
+            <input className="formField" name="oabNumber" 
+              value={oabNumber}
+              onChange={e => setOabNumber(e.target.value)}
+              placeholder="Número de OAB" type="text" required/>
+          </div>
+          <div className="inputField">
+            <input className="formField" name="cpf" 
+              value={cpf}
+              onChange={e => setCpf(e.target.value)}
+              placeholder="CPF" type="text" required/>
+          </div>
+          <button className="btn" type="submit">Cadastrar</button>  
         </form>
     </div>
   );
