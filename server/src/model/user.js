@@ -1,5 +1,3 @@
-// edit 1: onde era Schema coloquei Account e onde era user coloquei account
-// edit 2 coloquei dentro do account os _user e o _lawyer e coloquei esses schemas
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 

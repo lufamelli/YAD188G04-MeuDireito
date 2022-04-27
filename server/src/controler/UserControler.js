@@ -57,14 +57,20 @@ module.exports = {
   async createLawyer(req,res){
     const { firstName, lastName, email, password, oabNumber, cpf, role } = req.body;
 
-      let generateData = {}
-      generateData = {
-        firstName, lastName, email, password, oabNumber, cpf, role
-      }
+    let generateData = {}
+    generateData = {
+      firstName, lastName, email, password, oabNumber, cpf, role
+    }
+
+    const usedEmail = await account.findOne({email})
+
+    if(usedEmail) {
+      res.status(403).json({message:"Email ja cadastrado." })
+    }
+    else {
       const users = await account.create(generateData); // SELECT * FROM users
       res.json(users)
-      //return res.json({message: 'Email ja cadastrado, faça login.'})
-
+    }
   },
 
   async updateLawyer(req,res){
@@ -79,14 +85,14 @@ module.exports = {
   },
 
   async login(req,res){
-    const {email, password, _id, firstName, lastName}= req.body;
-    account.findOne({email: email }, function(err,account){
+    const {email, password, _id, firstName, lastName, oabNumber}= req.body;
+    account.findOne({email:email }, function(err,account){
       if(err) {
         console.log(err);
         res.status(200).json({erro: "Erro no servidor, tente novamente"});
       }
       else if(!account) {
-        res.status(200).json({status:2, error: "E-mail e/ou senha não conferem"})
+        res.status(200).json({status:2, error: `${account}E-mail e/ou senha não conferem`})
       }
       else {
         account.isCorrectPassword(password, async function(err, same) {
@@ -94,7 +100,7 @@ module.exports = {
             res.status(200).json({error: "Erro no servidor, tente novamente"})
           }
           else if(!same) {
-            res.status(200).json({status: 2, errorrr:"E-mail e/ou senha não conferem."})
+            res.status(200).json({status: 2, error:"SENHAE-mail e/ou senha não conferem."})
           }
           else {
             const payload = {email};
@@ -102,29 +108,33 @@ module.exports = {
               expiresIn: '24h'
             });
             res.cookie('token ', token, {httpOnly: true});
-            res.status(200).json({status:1, auth: true, token: token, _id: account._id, firstName: account.firstName, lastName: account.lastName})
-            req.token = token;
-            if(!token) {
-              req.json({status:401, message:"Token não foi gerado" })
-            }
-            else {
-              jwt.verify(token, secret, function(err, decoded) {
-                if(err) {
-                  req.json({status:401, message:'Token inválido'})
-                }
-                else {
-                  req.email = decoded.email;
-                  res.json({status:200})
-                }
-              })
-            }
+            res.status(200).json({status:1, auth: true, token: token, _id: account._id, firstName: account.firstName, lastName: account.lastName, oabNumber: account.oabNumber})
           }
         })
       }
     })
   },
-
   async checkToken(req,res){
-    const token = req.body.token || req.query.token || req.cookies.token || req.headers['x-access-token']
+    const token = req.body.token || req.query.token || req.cookies.token || req.headers['x-access-token'];
+    if(!token){
+        res.json({status:401,msg:'Não autorizado: Token inexistente!'});
+    }else{
+        jwt.verify(token, secret, function(err, decoded){
+            if(err){
+                res.json({status:401,msg:'Não autorizado: Token inválido!'});
+            }else{
+                res.json({status:200})
+            }
+        })
+    }
+  },
+  async logout(req,res){
+      const token = req.headers.token;
+      if(token){
+          res.cookie('token',null,{httpOnly:true});
+      }else{
+          res.status(401).send("Falha no logout.")
+      }
+      res.send("Logout concluído.");
   }
 }

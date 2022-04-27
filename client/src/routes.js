@@ -6,9 +6,10 @@ import Home from "./pages/client";
 import LoginUser from "./pages/user/loginUser";
 import ResgisterUser from "./pages/user/registerUser";
 import ShowUser from './pages/user/showUser';
-
 import ResgisterLawyer from "./pages/lawyer/registerLawyer";
 import ShowLawyer from './pages/lawyer/showLawyer';
+import CreatePost from "./pages/posts/createPost";
+import Posts from "./pages/posts";
 
 
 //import PrivateRoute from  './services/wAuth'
@@ -25,6 +26,8 @@ export default function Router() {
 
         <Route path="/lawyer/register" element={<ResgisterLawyer/>}/>
         <Route path="/lawyer/show" element={<ShowLawyer/>}/>
+        <Route path="/post/create" element={<CreatePost/>}/>
+        <Route path="/post" element={<Posts/>}/>
       </Routes>
     </BrowserRouter>
   )

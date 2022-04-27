@@ -8,9 +8,9 @@ export default function ResgisterLawyer() {
   const [oabNumber, setOabNumber] = useState('')
   const [cpf, setCpf] = useState('')
 
-  async function handleSubmit(event) {
+  async function handleSubmit(e) {
     //conexão React - Node
-    event.preventDefault() 
+    e.preventDefault() 
     const data = {
       firstName:firstName, 
       lastName:lastName, 
