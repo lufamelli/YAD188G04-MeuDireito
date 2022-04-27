@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GET_POSTS } from '../../constants';
 import api from '../../services/api';
-import Search from '../user/search';
+//import Search from '../user/search';
 import { useDispatch, useSelector } from 'react-redux';
 import './postStyle.css';
 
