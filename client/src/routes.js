@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 
 import Home from "./pages/client";
 
@@ -10,11 +10,25 @@ import ResgisterLawyer from "./pages/lawyer/registerLawyer";
 import ShowLawyer from './pages/lawyer/showLawyer';
 import CreatePost from "./pages/posts/createPost";
 import Posts from "./pages/posts";
-
+import { getToken } from "./services/auth";
 
 //import PrivateRoute from  './services/wAuth'
 
+const PrivateRoute = ({element: Component, ...rest}) => (
+  <Route
+    {...rest}
+    render={props =>
+      getToken() ? (
+        <Component {...props} />
+      ) : (
+        <Navigate to={{ pathname: "/", state: { from: props.location } }} />
+      )
+    }
+  />
+)
+
 export default function Router() {
+
   return (
     <BrowserRouter>
       <Routes>

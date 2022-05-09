@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { GET_POSTS } from '../../constants';
 import api from '../../services/api';
-//import Search from '../user/search';
-import { useDispatch, useSelector } from 'react-redux';
 import './postStyle.css';
 
 export default function Posts(props) {
 
   const [posts, setPosts] = useState([]);
-  const [searched, setSearched] = useState('');
-  //const [results, setResults] = useState([]);
   const [searchText, setSearchText] = useState('');
 
-  const dispatch = useDispatch()
 
   useEffect(() =>{
     async function loadPosts(){
@@ -23,77 +17,31 @@ export default function Posts(props) {
     loadPosts();
   },[]);
 
-  /*
-  const updateSearchText = (newSearchText) =>  {
-    setSearchText(newSearchText)
-    console.log(newSearchText)
-
-    const variables = {
-      skip: 0,
-      searchText: newSearchText
-  }
-
-  getPosts(variables)
-
-    const posts = response.data
-    if(response.status ===200) {
-      console.log('status 200')
-      filterPosts(posts, searchText)
-    }
-    else {
-      console.log(response.status )
-    }
-  }
-
-  const getPosts = (variables) => {
-    
-  }
-
-  function filterPosts(posts, searchText) {
-    const results = posts.map((post) => post.title.includes(searchText))
-    setSearched({posts: results})
-
-  }
-  
-  const postHeadlines = {
-    margin: '0 10px',
-    pading: '0 10px',
-  }*/
-
-  const buildSearch = (e) => {
-    setSearchText(e.target.value)
-
-    dispatch(getPosts({title: 'text', query: e.target.value}))
-
+async function handleOnSubmit(event) {
+  event.preventDefault();
+  const response = await api.get("/post");
+  const posts = response.data
+  console.log(posts);
+  const result = posts.filter(post => post.title.toLowerCase().indexOf(searchText) !== -1);
+  console.log(result);
+  setPosts(result);
 }
-
-async function getPosts(arg) {
-  //try {
-		const response = await api.post('/api/filter/search', arg);
-
-		dispatch({
-			title: GET_POSTS,
-			payload: response.data.posts,
-		});
-	/*} catch (err) {
-		console.log('getProductsByFilter api error: ', err);
-		dispatch({ title: STOP_LOADING });
-		dispatch({
-			title: SHOW_ERROR_MESSAGE,
-			payload: err.response.data.errorMessage,
-		});
-	}*/
+function buildSearch(event) {
+setSearchText(event.target.value.toLowerCase());
 }
   return(
     <>
       <div>
-        <input 
-          placeholder="Pesquisa" 
-          name="search"
-          value={searchText} 
-          onChange={buildSearch}
-          className="search" 
-        />
+        <form onSubmit={handleOnSubmit}>
+          <input 
+            placeholder="Pesquisa" 
+            name="search"
+            value={searchText} 
+            onChange={buildSearch}
+            className="search" 
+          />
+          <button>search</button>
+        </form>  
       </div>
       <div>
       {

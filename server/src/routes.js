@@ -50,7 +50,7 @@ routes.put('/post/', PostController.update);
 
 
 //lawyer routes
-routes.post('/lawyer', authAccount(["lawyer"]), UserControler.createLawyer);
+routes.post('/lawyer', UserControler.createLawyer);
 routes.put('/lawyer/', authAccount(["lawyer"]), UserControler.updateLawyer);
 
 

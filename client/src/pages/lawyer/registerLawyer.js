@@ -20,8 +20,9 @@ export default function ResgisterLawyer() {
       cpf:cpf
     }
 
-    if(firstName !== '' && lastName !== '' && email !== '' && password!== '') {
-      const response = await api.post('/user', data);
+    if(firstName !== '' && lastName !== '' && email !== '' && password!== ''
+      && oabNumber!== '' && cpf!== '') {
+      const response = await api.post('/lawyer', data);
 
       if(response.status === 200) {
       window.location.href = '/user'

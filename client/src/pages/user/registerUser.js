@@ -19,22 +19,16 @@ export default function ResgisterUser() {
 
     if(firstName !== '' && lastName !== '' && email !== '' && password!== '') {
       const response = await api.post('/user', data);
-
-
-      console.log('entrou no handleSubmit')
-      //if(response.status === 200) 
-      //{
+      console.log('tem codigo aqui porra')
+      if(response.status === 200) {
       window.location.href = '/user'
       console.log('status 200')
       alert('Usuário criado com sucesso.')
       console.log('entrou no status 200')
-      //}
-     if(response.status === 403) {
-        console.log('status 403')
-        alert('Email ja cadstrado')
       }
       else {
-        console.log('status = ', response.status)
+        alert('Email ja cadstrado')
+        console.log(response.status.message)
       }
     }
   }
@@ -49,6 +43,7 @@ export default function ResgisterUser() {
 
     if(firstName !== '' && lastName !== '' && email !== '' && password!== '') {
       const response = await api.post('/user', data);
+      console.log(response.status);
 
       if(response.status === 403) {
         console.log('status 403')
@@ -99,7 +94,8 @@ export default function ResgisterUser() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               type="password"
-              required/>
+              required
+              minLength={6}/>
           </div>  
           <div className="inputField">
             <input className="formField" name="confirmPassword" 

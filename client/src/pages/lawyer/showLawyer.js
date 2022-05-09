@@ -13,7 +13,7 @@ export default function ShowLawyer() {
 
   return (
     <div>
-      <div><h1>Bem vindo {getNomeUser()} !</h1></div>
+      <div><h1>Bem vindo(a) {getNomeUser()} !</h1></div>
       
       <button onClick={handelClick}>Voltar a Home</button>
       <button onClick={goToCreatePost}>Criar publicação</button>

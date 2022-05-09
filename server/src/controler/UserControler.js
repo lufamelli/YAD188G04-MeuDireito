@@ -24,15 +24,16 @@ module.exports = {
         firstName, lastName, email, password, role
       }
 
-      const usedEmail = await account.findOne({email})
-
-      if(usedEmail) {
-        res.status(403).json({message:"Email ja cadastrado." })
-      }
-      else {
-        const users = await account.create(generateData); // SELECT * FROM users
-        res.json(users) 
-      }
+      //const usedEmail = await 
+      account.findOne({email:email}, function(err, account) {
+        if(account) {
+          res.status(403).json({message:"Email ja cadastrado." })
+        }
+        else {
+          const users = account.create(generateData); 
+          res.json(users) 
+        }
+      })
   },
 
   async update(req,res){
