@@ -19,7 +19,7 @@ routes.post('/user/login', UserControler.login);
 routes.get('/user/checktoken', UserControler.checkToken);
 routes.get('/user/logout', UserControler.logout);
 
-//postd routers
+//post routers
 routes.get('/post', PostController.index);
 routes.post('/post', PostController.search);
 /*routes.get('/post', (req, res) => {

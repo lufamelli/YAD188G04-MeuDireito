@@ -38,7 +38,8 @@ export default function ResgisterLawyer() {
   return (
     <div>
       <h1>Cadastrar usuário</h1>
-        <form className="resgisterForm" onSubmit={handleSubmit}>
+      <div className="registerForm"> 
+        <form onSubmit={handleSubmit}>
           <div className="inputForm">
             <input 
               className="formField" 
@@ -98,6 +99,7 @@ export default function ResgisterLawyer() {
           </div>
           <button className="btn" type="submit">Cadastrar</button>  
         </form>
+      </div>  
     </div>
   );
 }

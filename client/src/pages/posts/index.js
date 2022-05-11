@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import './postStyle.css';
+import '../../css/post.css';
+import '../../css/buttons.css';
 
 export default function Posts(props) {
 
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState('');
-
+  const [postId, setpostId] = useState([]);
 
   useEffect(() =>{
     async function loadPosts(){
-      const response = await api.get("/post");
+      const response = await api.get(`/post/`);
       console.log(response)
       setPosts(response.data)
     }
     loadPosts();
   },[]);
+
+  async function openPost(){
+    /*console.log("open post")
+    const response = await api.get(`/post/post:_id`);
+    const posts = response.data
+    console.log(posts)
+    return posts*/
+  }
 
 async function handleOnSubmit(event) {
   event.preventDefault();
@@ -23,36 +32,37 @@ async function handleOnSubmit(event) {
   const posts = response.data
   console.log(posts);
   const result = posts.filter(post => post.title.toLowerCase().indexOf(searchText) !== -1);
-  console.log(result);
   setPosts(result);
 }
 function buildSearch(event) {
 setSearchText(event.target.value.toLowerCase());
 }
   return(
-    <>
-      <div>
+    <div className="containerPost">
+      <div className="search">
         <form onSubmit={handleOnSubmit}>
           <input 
             placeholder="Pesquisa" 
-            name="search"
+            name="Pesquisa"
             value={searchText} 
             onChange={buildSearch}
-            className="search" 
+            className="inputSearch"
           />
-          <button>search</button>
+          <button className="btn-search">PESQUISAR</button>
         </form>  
       </div>
-      <div>
-      {
-        posts.map((post) => (
-          <div className="postHeadlines" key={post._id}>
-            <div>{post.title}</div>
-            <div>{post.subTitle}</div>
-          </div>
-        ))
-      }
+      <div className="posts">
+        {
+          posts.map((post) => (
+            <div className="post" key={post._id} onClick={openPost}>
+              
+              <h2>{post.title}</h2>
+              <p>{post.subTitle}</p>
+            </div>
+          ))
+        }
       </div>
-    </>
+      <h3>Não encontrou sua dúvida? Então <a href="/user" className="highlight">clique aqui</a> para criar uma nova.</h3>
+    </div>
   )
 }

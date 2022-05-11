@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import api from '../../services/api'
+import '../../css/register.css';
 
 export default function ResgisterUser() {
   const [firstName, setFirstName] = useState('')
@@ -19,7 +20,6 @@ export default function ResgisterUser() {
 
     if(firstName !== '' && lastName !== '' && email !== '' && password!== '') {
       const response = await api.post('/user', data);
-      console.log('tem codigo aqui porra')
       if(response.status === 200) {
       window.location.href = '/user'
       console.log('status 200')
@@ -52,10 +52,10 @@ export default function ResgisterUser() {
     }
   }  
   return (
-    <div>
+    <div className="container">
       <h1>Cadastrar usuário</h1>
         <form className="resgisterForm" onSubmit={handleSubmit}>
-          <div className="inputForm">
+          <div className="inputField">
             <input 
               className="formField" 
               name="firstName" 
@@ -101,7 +101,7 @@ export default function ResgisterUser() {
             <input className="formField" name="confirmPassword" 
               placeholder="Confirmação de senha" type="password" required/>
           </div>
-          <button className="btn" onClick={handleNoSubmit} type="submit">Cadastrar</button>  
+          <button className="btn btn-primary inputField" onClick={handleNoSubmit} type="submit">Cadastrar</button>  
         </form>
     </div>
   );

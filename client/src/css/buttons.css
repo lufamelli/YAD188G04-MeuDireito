@@ -1,0 +1,17 @@
+.btn {
+  border-radius: 10px;
+  font-family: 'Radio Canada', sans-serif;
+  border-color: #E6E9E0;
+  height: 25px;
+}
+
+.btn-search {
+  font-family: 'Radio Canada', sans-serif;
+  background-color: #9bfcef;
+  height: 25px;
+  border-color: #E6E9E0;
+}
+
+.btn-primary {
+  background-color: #74BF77;
+}

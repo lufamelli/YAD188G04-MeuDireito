@@ -1,10 +1,9 @@
 import React from 'react';
 import Posts from '../posts';
+import '../../css/buttons.css';
+import '../../css/home.css';
 
 export default function Home() {
-  function goToLogin() {
-    window.location.href= '/user'
-  }
   
   function goToRegister() {
     window.location.href= '/user/register'
@@ -14,11 +13,10 @@ export default function Home() {
     window.location.href= '/lawyer/register'
   }
   return (
-    <div>
+    <div className="containerHome">
       <h1>Página inicial</h1>
-      <button onClick={goToLogin}>Login</button>
-      <button onClick={goToRegister}>Cadastrar usuário</button>
-      <button onClick={goToRegisterLawyer}>Cadastrar advogado</button>
+      <button onClick={goToRegister} className="btn btn-primary">Cadastrar usuário</button>
+      <button onClick={goToRegisterLawyer} className="btn btn-primary">Cadastrar advogado</button>
       <Posts />
     </div>
   );

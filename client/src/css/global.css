@@ -3,3 +3,12 @@ body, h1, h2, h3 {
   background: #F1F1F1;
 }
 
+h1 {
+  font-family: 'Roboto', sans-serif ;
+  font-weight: 500;
+}
+
+h3 {
+  font-family: 'Radio Canada', sans-serif;
+  font-weight: 600
+}
