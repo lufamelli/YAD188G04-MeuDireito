@@ -6,27 +6,28 @@ import Posts from '../posts';
 export default function ShowUser() {
 
   function handleClick() {
-    window.location.href= '/'
+    window.location.href= '/question/create'
   }
 
   async function handleLogout() {
     if(window.confirm("Deseja sair?")) {
-      const response = await api.get("/user/logout", {headers: {token: getToken()}})
+      localStorage.clear()
+      window.location.href = '/'
+      /*const response = await api.get("/user/logout", {headers: {token: getToken()}})
       if(response.status ===200) {
         logout();
         window.location.href = '/user/login'
       }
       else {
         alert("Erro no logout, status: " + response.status)
-      }
+      }*/
     }
   }
   return (
     <div>
-      <div><h1>Bem vindo, {getNomeUser()}!</h1></div>
-      
-      <button onClick={handleClick}>Voltar a Home</button>
-      <button onClick={handleLogout}>Sair</button>
+      <div><h1>Olá, {getNomeUser()}!</h1></div>
+      <button className="btn btn-primary" onClick={handleClick}>Criar pergunta</button>
+      <button className="btn btn-primary" onClick={handleLogout}>Sair</button>
       <Posts />
     </div>
   );

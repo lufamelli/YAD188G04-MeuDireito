@@ -3,13 +3,20 @@
   font-family: 'Radio Canada', sans-serif;
   border-color: #E6E9E0;
   height: 25px;
+  cursor: pointer;
+}
+
+.btnMenu {
+  height: 20px;
+  border: 0;
+  background: transparent;
 }
 
 .btn-search {
-  font-family: 'Radio Canada', sans-serif;
   background-color: #9bfcef;
   height: 25px;
   border-color: #E6E9E0;
+  cursor: pointer;
 }
 
 .btn-primary {

@@ -1,0 +1,11 @@
+.headerContainer {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #C1EDE2;
+}
+
+.btnImage{
+  height: 20px;
+}
+

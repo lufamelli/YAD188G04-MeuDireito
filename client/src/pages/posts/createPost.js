@@ -41,7 +41,7 @@ function CreatePost() {
         <div className="inputForm">
           <input 
             className="formField" 
-            name="firstName" 
+            name="title" 
             placeholder="Título"
             value={title}
             onChange={e => setTitle(e.target.value)}
@@ -52,7 +52,7 @@ function CreatePost() {
         <div className="inputField">
           <input 
             className="formField" 
-            name="lastName" 
+            name="subtitle" 
             placeholder="Subtitulo" 
             value={subTitle}
             onChange={e => setSubTitle(e.target.value)}
@@ -62,8 +62,8 @@ function CreatePost() {
         <div className="inputField">
           <input 
             className="formField" 
-            name="email" 
-            placeholder="Email" 
+            name="text" 
+            placeholder="Corpo" 
             value={body}
             onChange={e => setBody(e.target.value)}
             type="text"

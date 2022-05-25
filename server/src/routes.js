@@ -1,7 +1,9 @@
+//const protect = require ('./middlewares/authMiddleware');
 const express = require('express');
 const PostController = require('./controler/PostController');
+const QuestionController = require('./controler/QuestionController');
 const UserControler = require('./controler/UserControler');
-const {authAccount, isEmailRegistered} = require('./middlewares');
+const {authAccount, protect, isEmailRegistered} = require('./middlewares/authMiddleware');
 
 const routes= express.Router();
 
@@ -10,6 +12,7 @@ routes.get('/', function(req,res){
 })
 
 //user routes
+routes.get('/user/authuser', protect, UserControler.teste )
 routes.get('/user', UserControler.index);
 routes.get('/user/:_id', UserControler.findId);
 routes.post('/user', UserControler.createUser);
@@ -48,6 +51,11 @@ routes.post('/post/create', PostController.create);
 routes.delete('/post/:_id', PostController.delete);
 routes.put('/post/', PostController.update);
 
+//questions
+routes.post('/question/create', QuestionController.create);
+routes.delete('/question/:_id', QuestionController.delete);
+routes.put('/question/', QuestionController.update);
+routes.get('/question', QuestionController.index);
 
 //lawyer routes
 routes.post('/lawyer', UserControler.createLawyer);

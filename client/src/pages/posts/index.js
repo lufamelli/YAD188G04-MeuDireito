@@ -18,12 +18,10 @@ export default function Posts(props) {
     loadPosts();
   },[]);
 
-  async function openPost(){
-    /*console.log("open post")
-    const response = await api.get(`/post/post:_id`);
-    const posts = response.data
-    console.log(posts)
-    return posts*/
+  async function openPost(key){
+    //const id = post._id
+    //console.log(id)
+    //window.location.href = `/posts/${key}`
   }
 
 async function handleOnSubmit(event) {
@@ -40,7 +38,7 @@ setSearchText(event.target.value.toLowerCase());
   return(
     <div className="containerPost">
       <div className="search">
-        <form onSubmit={handleOnSubmit}>
+        <form className="formSearch" onSubmit={handleOnSubmit}>
           <input 
             placeholder="Pesquisa" 
             name="Pesquisa"
@@ -52,10 +50,9 @@ setSearchText(event.target.value.toLowerCase());
         </form>  
       </div>
       <div className="posts">
-        {
+        { 
           posts.map((post) => (
-            <div className="post" key={post._id} onClick={openPost}>
-              
+            <div className="post" id={post.id} onClick={openPost}>
               <h2>{post.title}</h2>
               <p>{post.subTitle}</p>
             </div>

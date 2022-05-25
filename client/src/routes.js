@@ -11,6 +11,9 @@ import ShowLawyer from './pages/lawyer/showLawyer';
 import CreatePost from "./pages/posts/createPost";
 import Posts from "./pages/posts";
 import { getToken } from "./services/auth";
+import Detail from "./pages/posts/detail";
+import CreateQuestion from "./pages/question/createQuestion";
+import Questions from "./pages/question/questions";
 
 //import PrivateRoute from  './services/wAuth'
 
@@ -40,8 +43,14 @@ export default function Router() {
 
         <Route path="/lawyer/register" element={<ResgisterLawyer/>}/>
         <Route path="/lawyer/show" element={<ShowLawyer/>}/>
+        
         <Route path="/post/create" element={<CreatePost/>}/>
         <Route path="/post" element={<Posts/>}/>
+        <Route path="/post/:_id" element={<Detail/>}/>
+        
+
+        <Route path="/question/create" element={<CreateQuestion/>}/>
+        <Route path="/questions" element={<Questions/>}/>
       </Routes>
     </BrowserRouter>
   )

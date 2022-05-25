@@ -1,0 +1,73 @@
+const account = require('../model/user')
+const jwt = require("jsonwebtoken");
+const secret = "mysecret";
+//const secret = require("../controler/UserControler")
+
+const authAccount = (permission) => {
+  return (req,res,next) => {
+    const role = req.body.role
+    if(permission.includes(role)){
+      next();
+    }
+    else {
+      return res.status(401).json("Você não tem permissão para isso")
+    }
+  }
+};
+const protect = async (req, res, next) => {
+  let token
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      token = req.headers.authorization.split(' ')[1]
+
+      const decoded = jwt.verify(token, secret)
+
+      req.user = await account.findOne(decoded._id).select('-password')
+
+      next()
+    } catch (error) {
+      console.error(error)
+      res.status(401)
+      throw new Error('Erro, não autorizado')
+    }
+  }
+  else if (!token) {
+    res.status(401)
+    throw new Error('Token de autorização não encontrado')
+  }
+}
+
+  /*
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      token = req.headers.authorization.split(' ')[1]
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+      req.user = await User.findById(decoded.id).select('-password')
+
+      next()
+    } catch (error) {
+      console.error(error)
+      res.status(401)
+      throw new Error('Not authorized, token failed')
+    }
+  }
+
+  if (!token) {
+    res.status(401)
+    throw new Error('Not authorized, no token')
+  }
+  */
+
+
+
+
+module.exports = {authAccount, protect};

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import api from '../../services/api';
 //import { AuthLogin } from '../../services/authLogin';
 import {setIdUser, setNomeUser, login, setOab, getOab, NUMERO_OAB} from '../../services/auth';
-import '../../css/login.css';
+import '../../css/form.css';
 
 /*import {login, setIdUser, setNomeUser} from '../../services/auth'*/
 export default function LoginUser() {
@@ -62,21 +62,23 @@ export default function LoginUser() {
     })
   }
   return (
-    <div className="containerLogin">
-      <h1>Login</h1>
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <div className="inputLogin">
+    <div className="container">
+      <form className="resgisterForm" onSubmit={handleSubmit}>
+        <h1>Login</h1>
+        <div className="inputField">
+          <label htmlFor="">E-mail</label>
           <input 
             className="formField" 
             name="email" 
-            placeholder="Digite seu email" 
+            placeholder="Digite seu email cadastrado" 
             value={email}
             onChange={e => setEmail(e.target.value)}
             type="email"
             ref={userRef}
             required/>
         </div>
-        <div className="inputLogin">
+        <div className="inputField">
+            <label htmlFor="">Senha</label>
           <input 
             className="formField" 
             name="password" 
