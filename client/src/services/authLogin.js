@@ -4,7 +4,7 @@ import { login, logout, getToken } from './auth';
 import { Route, Navigate } from 'react-router-dom';
 //import LinearProgress from '@material-ui/core/LinearProgress';
 
-export default function AuthLogin({component: Component, ...rest}) {
+function AuthLogin({component: Component, ...rest}) {
     const [ redirect, setRedirect ] = useState(false);
     const [ load, setLoad ] = useState(true);
 
@@ -33,3 +33,14 @@ export default function AuthLogin({component: Component, ...rest}) {
         } />
     )
 }
+
+export const redirectUser = (ctx, location) => {
+    if (ctx.req) {
+        ctx.res.writeHead(302, { Location: location });
+        ctx.res.end();
+    } else {
+        window.location.href = location;
+    }
+};
+
+module.exports = {AuthLogin, redirectUser}

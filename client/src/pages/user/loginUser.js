@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import api from '../../services/api';
 //import { AuthLogin } from '../../services/authLogin';
-import {setIdUser, setNomeUser, login, setOab, getOab, NUMERO_OAB} from '../../services/auth';
+import {setIdUser, setNomeUser, login, setOab, getOab} from '../../services/auth';
 import '../../css/form.css';
 
 /*import {login, setIdUser, setNomeUser} from '../../services/auth'*/
@@ -89,6 +89,7 @@ export default function LoginUser() {
             required/>
         </div>  
         <button className="btn btn-primary" type="submit">Entrar</button>
+        <h4>Ainda não tem conta? <a href="/user/register" className="highlight">Crie uma aqui!</a></h4>
         <p ref={errorRef} className={errorMsg ? "errormsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
       </form>    
     </div>

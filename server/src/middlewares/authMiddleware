@@ -18,12 +18,10 @@ const protect = async (req, res, next) => {
   let token
 
   if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    req.headers.authorization
   ) {
     try {
-      token = req.headers.authorization.split(' ')[1]
-
+      token = req.headers.authorization
       const decoded = jwt.verify(token, secret)
 
       req.user = await account.findOne(decoded._id).select('-password')
@@ -40,6 +38,30 @@ const protect = async (req, res, next) => {
     throw new Error('Token de autorização não encontrado')
   }
 }
+
+const verifyToken = async (req, res, next) => {
+    try {
+      if(!req.headers.authorization) {
+        return res.status(401)
+      }
+      let token = req.headers.authorization
+
+      const {userId} = jwt.verify(token, secret)
+
+      req.userId = userId;
+
+      next();
+
+      /*req.userId = await account.findOne(decoded._id).select('-password')
+
+      next()*/
+    } catch (error) {
+      console.error(error)
+      res.status(401)
+      throw new Error('Erro, não autorizado')
+    }
+  }
+
 
   /*
   if (
@@ -70,4 +92,4 @@ const protect = async (req, res, next) => {
 
 
 
-module.exports = {authAccount, protect};
+module.exports = {authAccount, protect, verifyToken};

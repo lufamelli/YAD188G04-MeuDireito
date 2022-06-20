@@ -33,10 +33,9 @@ export default function CreateQuestion() {
     }
   }
   return (
-    <>
-      <button onClick={handleLogout}>Sair</button>
-      <div>Criar pergunta</div>
+    <div className="containerForm">
       <form className="resgisterForm" onSubmit={questionPublication}>
+        <h1>Criar pergunta</h1>
         <div className="inputForm">
           <input 
             className="formField" 
@@ -61,6 +60,6 @@ export default function CreateQuestion() {
         </div>
         <button className="btn btn-primary" type="submit">Publicar</button>
       </form>
-      </>  
+      </div>  
   )
 }

@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import api from '../../services/api'
+import '../../css/form.css';
+
 export default function ResgisterLawyer() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -36,10 +38,10 @@ export default function ResgisterLawyer() {
     }
   }
   return (
-    <div>
-      <h1>Cadastrar usuário</h1>
-      <div className="registerForm"> 
-        <form onSubmit={handleSubmit}>
+    <div className="container">
+      <div className="inputField"> 
+        <form className="resgisterForm" onSubmit={handleSubmit}>
+          <h1>Cadastro de advogado</h1>
           <div className="inputForm">
             <input 
               className="formField" 
@@ -97,7 +99,7 @@ export default function ResgisterLawyer() {
               onChange={e => setCpf(e.target.value)}
               placeholder="CPF" type="text" required/>
           </div>
-          <button className="btn" type="submit">Cadastrar</button>  
+          <button className="btn btn-primary inputField" type="submit">Cadastrar</button>  
         </form>
       </div>  
     </div>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
+import Details from '../question/details';
 
 
-function CreatePost() {
+function CreatePostOnQuestion() {
   const [title, setTitle] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [body, setBody] = useState('')
@@ -35,6 +36,8 @@ function CreatePost() {
   }
 
   return (
+    <>
+    <Details/>
     <div className="cPostContainer">
       <form className="resgisterForm" onSubmit={postPublication}>
         <h1>Criar post</h1>
@@ -73,7 +76,8 @@ function CreatePost() {
         <button className="btn btn-primary inputField" type="submit">Publicar</button>
       </form>
     </div>
+    </>
   )
 }
 
-export default CreatePost;
+export default CreatePostOnQuestion;

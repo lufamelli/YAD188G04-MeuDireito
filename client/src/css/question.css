@@ -1,0 +1,21 @@
+.containerQuestion {
+  margin: 60px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question {
+  margin: 40px 0 40px 0;
+  background-color: #E6E9E0;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.question h2 {
+  background-color: #E6E9E0;
+}
+
+.questions {
+  margin: 40px 0 40px 0;
+}

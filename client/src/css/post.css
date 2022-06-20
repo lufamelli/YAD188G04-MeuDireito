@@ -10,6 +10,7 @@
   background-color: #E6E9E0;
   padding: 10px;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .post h2 {

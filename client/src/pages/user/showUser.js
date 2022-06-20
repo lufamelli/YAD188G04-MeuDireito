@@ -24,10 +24,9 @@ export default function ShowUser() {
     }
   }
   return (
-    <div>
+    <div className="containerQuestion">
       <div><h1>Olá, {getNomeUser()}!</h1></div>
       <button className="btn btn-primary" onClick={handleClick}>Criar pergunta</button>
-      <button className="btn btn-primary" onClick={handleLogout}>Sair</button>
       <Posts />
     </div>
   );

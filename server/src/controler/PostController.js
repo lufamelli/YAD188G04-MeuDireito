@@ -31,8 +31,13 @@ module.exports = {
     },
     async details(req,res){
         const {_id} = req.params;
-        const post = await Post.findOne({_id});
-        res.json(post);
+        //const post = await Post.findOne({_id});
+        const post = await Post.findById({_id});
+        if(!post){
+            res.status(400).send("Falha no detalhe do post.")
+        }else {
+            res.json(post);
+        }
     },
     async delete(req,res){
         const { _id } = req.params;

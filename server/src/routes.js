@@ -3,7 +3,7 @@ const express = require('express');
 const PostController = require('./controler/PostController');
 const QuestionController = require('./controler/QuestionController');
 const UserControler = require('./controler/UserControler');
-const {authAccount, protect, isEmailRegistered} = require('./middlewares/authMiddleware');
+const {authAccount, protect, verifyToken, isEmailRegistered} = require('./middlewares/authMiddleware');
 
 const routes= express.Router();
 
@@ -56,6 +56,7 @@ routes.post('/question/create', QuestionController.create);
 routes.delete('/question/:_id', QuestionController.delete);
 routes.put('/question/', QuestionController.update);
 routes.get('/question', QuestionController.index);
+routes.get('/question/:_id', QuestionController.details);
 
 //lawyer routes
 routes.post('/lawyer', UserControler.createLawyer);

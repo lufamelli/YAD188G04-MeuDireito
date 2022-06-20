@@ -3,3 +3,11 @@
   flex-direction: column;
   align-items: center;
 }
+
+.heroTitle {
+  font-size: 2rem;
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+}

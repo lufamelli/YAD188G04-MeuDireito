@@ -18,10 +18,16 @@ export default function Home() {
   }
   return (
     <div className="containerHome">
-      <h1>Página inicial</h1>
-      <button onClick={goToRegister} className="btn btn-primary">Cadastrar usuário</button>
-      <button onClick={goToRegisterLawyer} className="btn btn-primary">Cadastrar advogado</button>
-      <button onClick={goToLogin} className="btn btn-primary">Logar advogado</button>
+      <div class="hero">
+        <div class="heroContent">
+          <div className="heroTitle"><h1>MEU DIREITO</h1></div>
+          <div className="heroSubtitle">
+            <h3>
+              Você tem dúvidas relacionadas ao direito do consumidor? Encontre a sua dúvida pesquisando abaixo. 
+            </h3>
+          </div>
+        </div>
+      </div>
       <Posts />
     </div>
   );

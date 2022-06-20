@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import {getNomeUser} from '../../services/auth'
-import '../../css/post.css';
+import {getNomeUser, getOab} from '../../services/auth'
+import '../../css/question.css';
 import '../../css/buttons.css';
 
 export default function ShowLawyer() {
-
+  console.log(getOab())
+  
   const [questions, setQuestions] = useState([]);
 
   useEffect(() =>{
     async function loadQuestions(){
+      
       const response = await api.get(`/question/`);
       console.log(response)
       setQuestions(response.data)
@@ -25,25 +27,27 @@ export default function ShowLawyer() {
     window.location.href= '/post/create'
   }
 
+  async function answerQuestion(event) {
+    const urlId = await `/post/create/${event.currentTarget.id}`
+    console.log(urlId)
+    window.location.href = urlId
+  }
+
   return (
-    <div>
-      <div><h1>Olá, {getNomeUser()} !</h1></div>
-      
-      <button className="btn btn-primary" onClick={handelClick}>Voltar a Home</button>
+    <div className="containerQuestion">
+      <div className="userName"><h1>Olá, {getNomeUser()} !</h1></div>      
       <button className="btn btn-primary" onClick={goToCreatePost}>Criar publicação</button>
-      <div className="containerPost">
-      <div className="posts">
+      <div className="questions">
         { 
           questions.map((question) => (
-            <div className="post" id={question.id}>
+            <div className="question" id={question._id}>
               <h2>{question.questionTitle}</h2>
               <p>{question.description}</p>
-              <button className="btn-search" >Responder pergunta</button>
+              <button className="btn-search" id={question._id} onClick={answerQuestion}>Responder pergunta</button>
             </div>
           ))
         }
       </div>
-    </div>
     </div>
   );
 }

@@ -10,10 +10,12 @@ import ResgisterLawyer from "./pages/lawyer/registerLawyer";
 import ShowLawyer from './pages/lawyer/showLawyer';
 import CreatePost from "./pages/posts/createPost";
 import Posts from "./pages/posts";
-import { getToken } from "./services/auth";
+import { getToken, getOab} from "./services/auth";
 import Detail from "./pages/posts/detail";
 import CreateQuestion from "./pages/question/createQuestion";
 import Questions from "./pages/question/questions";
+import CreatePostOnQuestion from "./pages/posts/createPostOnQuestion";
+import Details from "./pages/question/details";
 
 //import PrivateRoute from  './services/wAuth'
 
@@ -30,9 +32,27 @@ const PrivateRoute = ({element: Component, ...rest}) => (
   />
 )
 
-export default function Router() {
+function isLoged() {
+  if(getToken() != null) {
+    return true
+  }
+  else {
+    return false
+  }
+}
 
-  return (
+function isLawyer() {
+  if(getOab() !==null) {
+    return true
+  }
+  else {
+    return false
+  }
+}
+
+export default function Router() {
+    
+    return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -45,13 +65,14 @@ export default function Router() {
         <Route path="/lawyer/show" element={<ShowLawyer/>}/>
         
         <Route path="/post/create" element={<CreatePost/>}/>
+        <Route path="/post/create/:_id" element={<CreatePostOnQuestion/>}/>
         <Route path="/post" element={<Posts/>}/>
         <Route path="/post/:_id" element={<Detail/>}/>
         
-
         <Route path="/question/create" element={<CreateQuestion/>}/>
+        <Route path="/question/:_id" element={<Details/>}/>
         <Route path="/questions" element={<Questions/>}/>
       </Routes>
     </BrowserRouter>
-  )
+  )  
 }
