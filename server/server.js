@@ -7,7 +7,11 @@ const mongoose = require('mongoose')
 
 const expressIni = express() 
 
-mongoose.connect('mongodb://localhost:27017/TCCMeuDireito', {
+// first change for heroku deploy
+const PORT = process.env.PORT || 3003
+
+// second change for heroku deploy
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/TCCMeuDireito', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 }, function(err){
@@ -23,6 +27,11 @@ expressIni.use(cookieParser())
 expressIni.use(express.json())
 expressIni.use(routes)
 
-expressIni.listen(3003, function(){
+// third change for heroku deploy
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static('../client/build'))
+}
+
+expressIni.listen(PORT, function(){
   console.log("Server started")
 })

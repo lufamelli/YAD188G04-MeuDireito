@@ -60,7 +60,7 @@ setSearchText(event.target.value.toLowerCase());
           ))
         }
       </div>
-      <h3>Não encontrou sua dúvida? Então <a href={getToken() ? `/question/create` : `/user`}  className="highlight">clique aqui</a> para criar uma nova.</h3>
+      <h3>Não encontrou sua dúvida? Então <a href='/user'  className="highlight">clique aqui</a> para criar uma nova.</h3>
     </div>
   )
 }
